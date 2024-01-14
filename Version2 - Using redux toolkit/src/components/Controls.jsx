@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { MdDarkMode } from "react-icons/md";
 import { IconContext } from "react-icons";
+import { counterActions } from "../store";
 
 export default function Controls() {
   const dispatch = useDispatch();
@@ -26,29 +27,25 @@ export default function Controls() {
     ? "btn btn-outline-danger btn-lg px-4"
     : "btn btn-danger btn-lg px-4";
 
-  const inputClassNames = `${darkMode ? "input-dark" : "input-light"} form-control px-4 gap-3 mb-2`;
+  const inputClassNames = `${
+    darkMode ? "input-dark" : "input-light"
+  } form-control px-4 gap-3 mb-2`;
 
   const handleIncrement = () => {
-    dispatch({ type: "INCREMENT" });
+    dispatch(counterActions.increment());
   };
 
   const handleDecrement = () => {
-    dispatch({ type: "DECREMENT" });
+    dispatch(counterActions.decrement());
   };
 
   const handleAdd = () => {
-    dispatch({
-      type: "ADD",
-      payload: { num: Number(inputElement.current.value) },
-    });
+    dispatch(counterActions.add(Number(inputElement.current.value)));
     inputElement.current.value = "";
   };
 
   const handleSubtract = () => {
-    dispatch({
-      type: "SUBTRACT",
-      payload: { num: Number(inputElement.current.value) },
-    });
+    dispatch(counterActions.subtract(Number(inputElement.current.value)));
     inputElement.current.value = "";
   };
 
@@ -62,7 +59,7 @@ export default function Controls() {
         value={{ color: `${darkMode ? "white" : "black"}`, size: "20px" }}
       >
         <span
-          class="position-absolute top-0 start-100 translate-middle p-2 bg-transparent rounded-circle"
+          className="position-absolute top-0 start-100 translate-middle p-2 bg-transparent rounded-circle"
           style={{ cursor: "pointer" }}
           onClick={handleDarkModeToggle}
         >

@@ -1,6 +1,23 @@
-import { createStore } from "redux";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const INITIAL_VALUE = { counter: 0, darkMode: true };
+const counterSlice = createSlice({
+  name: "counter",
+  initialState: { counterVal: 0 },
+  reducers: {
+    increment: (currentState) => {
+      currentState.counterVal++;
+    },
+    decrement: (currentState) => {
+      currentState.counterVal--;
+    },
+    add: (currentState, action) => {
+      currentState.counterVal += action.payload;
+    },
+    subtract: (currentState, action) => {
+      currentState.counterVal -= action.payload;
+    },
+  },
+});
 
 const counterReducer = (store = INITIAL_VALUE, action) => {
   const newStore = { ...store };
@@ -20,6 +37,12 @@ const counterReducer = (store = INITIAL_VALUE, action) => {
   return newStore;
 };
 
-const counterStore = createStore(counterReducer);
+const counterStore = configureStore({
+  reducer: {
+    counter: counterSlice.reducer,
+  },
+});
+
+export const counterActions = counterSlice.actions;
 
 export default counterStore;
