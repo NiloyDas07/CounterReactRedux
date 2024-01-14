@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { MdDarkMode } from "react-icons/md";
 import { IconContext } from "react-icons";
-import { counterActions } from "../store";
+import { counterActions } from "../store/counter";
+import { darkModeToggle } from "../store/darkMode";
 
 export default function Controls() {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ export default function Controls() {
   };
 
   const handleDarkModeToggle = () => {
-    dispatch({ type: "DARK_MODE_TOGGLE" });
+    dispatch(darkModeToggle.toggleDarkMode());
   };
 
   return (

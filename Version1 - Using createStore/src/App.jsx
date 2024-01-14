@@ -11,10 +11,7 @@ function App() {
   const backgroundColor = darkMode ? "black" : "white";
 
   return (
-    <center
-      className="px-4 py-5 my-5"
-      style={{ backgroundColor: backgroundColor }}
-    >
+    <center style={{ backgroundColor: backgroundColor }}>
       <Container>
         <Header></Header>
         <Controls></Controls>
